@@ -1,6 +1,4 @@
 import json
-from typing import Union, Any
-
 from pydantic import ValidationError
 
 from .product_model import Product, ClothingProduct, ElectronicsProduct

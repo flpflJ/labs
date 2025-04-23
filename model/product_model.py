@@ -11,7 +11,6 @@ class Product(BaseModel):
     @field_validator('date', mode='before')
     @classmethod
     def dateCheck(cls, value: Any) -> datetime:
-        """Валидатор для преобразования строки в datetime"""
         if isinstance(value, datetime):
             return value
 
@@ -34,8 +33,13 @@ class ElectronicsProduct(Product):
     brand: str
 
     @field_validator('warranty_time',mode='before')
-    def dateCheck(cls, value: Any) -> datetime:
-        return Product.date_check(value)
+    def date_Check(cls, value: Any) -> datetime:
+        dt = Product.dateCheck(value)
+
+        if dt < datetime.now():
+            raise ValueError("Warranty date cannot be in the past")
+
+        return dt
 
 class ClothingProduct(Product):
     size: int

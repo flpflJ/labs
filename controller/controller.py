@@ -1,8 +1,6 @@
-import traceback
 from datetime import datetime
 from PyQt6.QtWidgets import QFileDialog, QMessageBox, QInputDialog, QDialog, QMainWindow
 from pydantic import ValidationError
-from enum import Enum
 
 from model.product_model import Product, ClothingProduct, ElectronicsProduct
 from model.json_parse import parse_products
