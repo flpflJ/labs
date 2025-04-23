@@ -1,0 +1,7 @@
+annotated-types==0.7.0
+pydantic==2.10.6
+pydantic_core==2.27.2
+PyQt6==6.8.1
+PyQt6-Qt6==6.8.2
+PyQt6_sip==13.10.0
+typing_extensions==4.12.2
