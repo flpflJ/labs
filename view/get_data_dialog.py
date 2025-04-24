@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QDialog, QFormLayout, QLineEdit, QDialogButtonBox
+from PyQt6.QtWidgets import QDialog, QFormLayout, QLineEdit, QDialogButtonBox, QLabel
 
 
 class FileAddDialog(QDialog):
@@ -23,14 +23,14 @@ class FileAddDialog(QDialog):
 
         layout = QFormLayout()
         layout.addRow("Name:", self.name_input)
-        layout.addRow("Date (DD/MM/YYY):", self.date_input)
+        layout.addRow("Date (DD/MM/YYYY):", self.date_input)
         layout.addRow("Count:", self.count_input)
 
         if product_type == "ElectronicsProduct":
-            layout.addRow("Warranty time:", self.warranty_time_input)
+            layout.addRow("Warranty date (DD/MM/YYYY):", self.warranty_time_input)
             layout.addRow("Brand:", self.brand_input)
         elif product_type == "ClothingProduct":
-            layout.addRow("Size(40-66):", self.size_input)
+            layout.addRow("Size (40-66):", self.size_input)
             layout.addRow("Material", self.material_input)
 
         layout.addWidget(self.button_box)

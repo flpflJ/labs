@@ -17,7 +17,7 @@ class ProductManager:
 
     def add_manually(self):
         product_types = ["Product", "ClothingProduct", "ElectronicsProduct"]
-        product_type, ok = QInputDialog.getItem(self.view, "Выберите тип файла", "Тип файла:", product_types, 0, False)
+        product_type, ok = QInputDialog.getItem(self.view, "Выберите тип продукта", "Тип продукта:", product_types, 0, False)
         if ok and product_type:
             dialog = FileAddDialog(product_type, self.view)
             if dialog.exec() == QDialog.DialogCode.Accepted:
