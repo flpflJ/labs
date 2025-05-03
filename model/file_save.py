@@ -1,13 +1,15 @@
 import json
 from datetime import datetime
-import typing_extensions
+
+from model.logger import logger
+
 
 def serializer(obj):
     try:
         if isinstance(obj, datetime):
             return obj.strftime('%d/%m/%Y')
     except Exception as e:
-        #logger.error(f'Datetime serializer error. Value: {obj}')
+        logger.error(f'Datetime serializer error. Value: {obj}')
         print(e)
 
 def save_to_file(products: list, filename: str):

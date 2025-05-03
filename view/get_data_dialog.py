@@ -1,4 +1,7 @@
-from PyQt6.QtWidgets import QDialog, QFormLayout, QLineEdit, QDialogButtonBox, QLabel
+from PyQt6.QtWidgets import QDialog
+from PyQt6.QtWidgets import QDialogButtonBox
+from PyQt6.QtWidgets import QFormLayout
+from PyQt6.QtWidgets import QLineEdit
 
 
 class FileAddDialog(QDialog):

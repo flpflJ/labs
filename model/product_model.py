@@ -1,7 +1,9 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, field_validator, ValidationError, ConfigDict
+from pydantic import BaseModel
+from pydantic import ConfigDict
+from pydantic import field_validator
 
 class Product(BaseModel):
     name: str
