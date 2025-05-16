@@ -1,9 +1,15 @@
-from PyQt6.QtWidgets import (
-    QMainWindow, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget, QPushButton, QMessageBox, QLabel
-)
-from PyQt6.QtCore import Qt
 from datetime import datetime
+
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QLabel
+from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtWidgets import QTableWidget
+from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QVBoxLayout
+from PyQt6.QtWidgets import QWidget
+
 from model.product_model import *
 
 
@@ -35,7 +41,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.table)
         for text, handler in buttons:
             btn = QPushButton(text)
-            btn.clicked.connect(lambda _, h=handler: (self.increment_counter(),h()))
+            btn.clicked.connect(lambda _, h=handler: (self.increment_counter(), h()))
             layout.addWidget(btn)
         self.new_label = QLabel(f"Нажатий на кнопки: {self.clicked_count}")
         layout.addWidget(self.new_label)

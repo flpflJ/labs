@@ -1,13 +1,20 @@
 from datetime import datetime
-from PyQt6.QtWidgets import QFileDialog, QMessageBox, QInputDialog, QDialog, QMainWindow
-from pydantic import ValidationError
 
-from model.product_model import Product, ClothingProduct, ElectronicsProduct
-from model.json_parse import parse_products
+from pydantic import ValidationError
+from PyQt6.QtWidgets import QDialog
+from PyQt6.QtWidgets import QFileDialog
+from PyQt6.QtWidgets import QInputDialog
+from PyQt6.QtWidgets import QMessageBox
+
+from model.file_save import save_to_json
 from model.form_validation import validate_data
+from model.json_parse import parse_products
+from model.logger import logger
+from model.product_model import ClothingProduct
+from model.product_model import ElectronicsProduct
+from model.product_model import Product
 from view.get_data_dialog import FileAddDialog
 from view.main_window import MainWindow
-from model.file_save import save_to_json, save_to_file
 
 
 class ProductManager:
@@ -16,8 +23,11 @@ class ProductManager:
         self.products: list[Product] = []
 
     def add_manually(self):
-        product_types = ["Product", "ClothingProduct", "ElectronicsProduct"]
-        product_type, ok = QInputDialog.getItem(self.view, "Выберите тип продукта", "Тип продукта:", product_types, 0, False)
+        product_types = ["Product", "ClothingProduct",
+                         "ElectronicsProduct"]
+        product_type, ok = QInputDialog.getItem(self.view,
+                                                "Выберите тип продукта", "Тип продукта:",
+                                                product_types, 0, False)
         if ok and product_type:
             dialog = FileAddDialog(product_type, self.view)
             if dialog.exec() == QDialog.DialogCode.Accepted:
@@ -41,7 +51,8 @@ class ProductManager:
                             name=data["name"],
                             date=datetime.strptime(data["date"], "%d/%m/%Y"),
                             count=int(data["count"]),
-                            warranty_time=datetime.strptime(data["warranty_time"],"%d/%m/%Y"),
+                            warranty_time=datetime.strptime(data["warranty_time"],
+                                                            "%d/%m/%Y"),
                             brand=data["brand"]
                         ))
                     else:
@@ -52,8 +63,10 @@ class ProductManager:
                         ))
                     self.view.safe_table_update(self.products)
                 except ValidationError as e:
+                    logger.warning(f"{e}: Validation error!!!")
                     QMessageBox.warning(self.view, "Ошибка валидации", str(e))
                 except ValueError as e:
+                    logger.warning(f"{e}: Format error!!!")
                     QMessageBox.warning(self.view, "Ошибка ввода", f"Недопустимый формат: {e}")
 
     def add_from_file(self):
@@ -79,6 +92,7 @@ class ProductManager:
             self.view.safe_table_update(self.products)
 
         except Exception as e:
+            logger.critical(f"{e}: Download error")
             QMessageBox.critical(
                 self.view,
                 "Ошибка загрузки",
